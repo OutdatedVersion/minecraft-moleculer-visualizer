@@ -1,5 +1,4 @@
-name: MinecraftMoleculerVisualizer
-main: com.outdatedversion.moleculer.MinecraftMoleculerVisualizer
-version: 1.0
-api-version: 1.16
-commands:
+name: MoleculerVisualizer
+main: ${main}
+version: ${version}
+api-version: 1.17
