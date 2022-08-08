@@ -13,7 +13,6 @@ import com.outdatedversion.moleculer.visualizer.moleculer.event.RequestTimeoutEv
 import com.outdatedversion.moleculer.visualizer.moleculer.event.ResponseEvent
 import de.slikey.effectlib.EffectManager
 import de.slikey.effectlib.EffectType
-import de.slikey.effectlib.effect.CircleEffect
 import de.slikey.effectlib.effect.HelixEffect
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -31,10 +30,12 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Mob
 import org.bukkit.entity.Panda
 import org.bukkit.entity.Pig
+import org.bukkit.entity.TNTPrimed
 import org.bukkit.event.EventHandler
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.util.Vector
 import org.jetbrains.annotations.NotNull
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -110,14 +111,12 @@ class VisualizerStage(
         Bukkit.getScheduler().runTask(this.plugin, Runnable {
             val sourceEntity = if (event.sourceServiceName != null) getEntityForService(event.sourceNodeId,
                 event.sourceServiceName) else getEntityForNode(event.sourceNodeId)
+
             if (sourceEntity != null) {
-                val effect = CircleEffect(this.effectManager)
-                effect.duration = 750
-                effect.particles = 20
-                effect.entity = sourceEntity
-                effect.color = Color.RED
-                effect.particle = Particle.REDSTONE
-                effect.start()
+                val tnt = sourceEntity.location.world.spawn(sourceEntity.location, TNTPrimed::class.java)
+                tnt.yield = 0f
+                tnt.fuseTicks = 40
+                tnt.velocity = Vector(Math.random(), Math.random() * 2, Math.random())
             }
         })
     }
@@ -255,6 +254,8 @@ class VisualizerStage(
                     serviceName = it
                 )?.remove()
             }
+            nodeIdToEntityUuid.remove(event.nodeId)
+            nodeIdToServices.remove(event.nodeId)
         })
     }
 
