@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "moleculer": "^0.14.21",
+    "moleculer": "^0.14.23",
     "nats": "^2.7.1"
   },
   "devDependencies": {
