@@ -29,9 +29,6 @@ This project supports only the in-process registry mechanism.
 
 - Firework: An event
 
-https://github.com/outdatedversion/minecraft-moleculer-visualizer
-https://moleculer.services
-
 ## Video
 
 [![Watch the video](https://i.ytimg.com/vi/atvKUGFIDAo/hqdefault.jpg)](https://www.youtube.com/watch?v=atvKUGFIDAo)
